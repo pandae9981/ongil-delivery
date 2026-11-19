@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>오는길택배 · 실명 없이, 내 일정에 맞춰 받는 안심 택배</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="device" aria-live="polite">
+
+  <!-- 공통 아이콘 -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></g></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></g></symbol>
+    <symbol id="i-status" viewBox="0 0 66 12"><g fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><circle cx="31.5" cy="10" r="1.3"/><rect x="43.5" y="2.5" width="17" height="7" rx="1.5"/></g><path d="M26 4.2a8 8 0 0 1 11 0M28.5 7a4.5 4.5 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="41.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/></symbol>
+  </svg>
+
+  <!-- ===================== 01 주문/결제 · 배송지 선택 ===================== -->
+  <section class="screen is-active" id="s1" aria-label="주문/결제">
+    <div class="status-bar"><span>9:41</span><svg width="66" height="12"><use href="#i-status"/></svg></div>
+    <header class="nav-bar">
+      <button class="back" aria-label="뒤로"><svg width="24" height="24"><use href="#i-back"/></svg></button>
+      <h1 class="t-headline">주문/결제</h1>
+    </header>
+    <div class="content">
+      <div class="product">
+        <div class="thumb c-muted"><svg width="32" height="32"><use href="#i-box"/></svg></div>
+        <div>
+          <p class="t-body bold">무선 이어폰 케이스 외 1건</p>
+          <p class="t-subhead c-gray">32,000원 · 무료배송</p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <h2 class="t-title3 bold">배송지 선택</h2>
+
+      <div role="radiogroup" aria-label="배송지" style="display:flex;flex-direction:column;gap:16px">
+        <button class="card option" role="radio" aria-checked="false" data-delivery="home">
+          <span class="row"><span class="radio"></span><span class="t-callout bold option-title">기본 배송지 (집 앞)</span></span>
+          <span class="t-footnote c-muted">서울시 ○○구 ○○로 12</span>
+        </button>
+        <button class="card option is-selected" role="radio" aria-checked="true" data-delivery="safe">
+          <span class="row"><span class="radio"></span><span class="t-callout bold option-title">안심 택배</span><span class="tag solid">추천</span></span>
+          <span class="t-footnote">스마트 거점(보관함)에서 수령<br />실명 대신 닉네임·안심번호로 배송</span>
+        </button>
+      </div>
+
+      <p class="hint t-caption1 c-gray"><svg class="c-muted" width="16" height="16"><use href="#i-info"/></svg>안심 택배를 고르지 않으면 기본 배송지로 일반 배송돼요</p>
+    </div>
+    <div class="footer"><button class="btn btn-primary" id="s1-next">다음 · 수령 장소 지정</button></div>
+    <div class="home-indicator"></div>
+  </section>
+
+  <!-- ===================== 02 보관함 위치 선택 ===================== -->
+  <section class="screen" id="s2" aria-label="보관함 위치 선택">
+    <div class="status-bar"><span>9:41</span><svg width="66" height="12"><use href="#i-status"/></svg></div>
+    <header class="nav-bar">
+      <button class="back" data-go="s1" aria-label="뒤로"><svg width="24" height="24"><use href="#i-back"/></svg></button>
+      <h1 class="t-headline">보관함 위치 선택</h1>
+    </header>
+    <div class="content" style="gap:14px">
+      <div class="map" aria-label="보관함 지도">
+        <svg class="roads" viewBox="0 0 335 168" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-10 120 L345 92" stroke="#fff" stroke-width="14"/><path d="M120 -10 L150 178" stroke="#fff" stroke-width="12"/>
+          <path d="M250 -10 L235 178" stroke="#fff" stroke-width="8"/><path d="M-10 40 L345 55" stroke="#fff" stroke-width="6"/>
+          <rect x="20" y="62" width="80" height="44" rx="6" fill="#E3E7EE"/><rect x="170" y="10" width="56" height="36" rx="6" fill="#E3E7EE"/><rect x="262" y="110" width="60" height="44" rx="6" fill="#E3E7EE"/>
+        </svg>
+        <span class="pin" style="left:18%;top:18%"></span>
+        <span class="pin" style="left:87%;top:42%"></span>
+        <span class="pin" style="left:61%;top:83%"></span>
+        <span class="pin is-selected c-white" style="left:42%;top:52%"><svg width="18" height="18"><use href="#i-box"/></svg></span>
+      </div>
+
+      <div class="card is-selected" style="gap:4px;background:var(--white)">
+        <div style="display:flex;gap:8px;align-items:center"><span class="t-callout bold">중앙역 보관함</span><span class="tag">가까운 거점</span></div>
+        <p class="t-footnote c-gray">1번 출구 앞 · 퇴근 동선 · 24시간</p>
+      </div>
+
+      <div class="card surface" style="gap:10px">
+        <div class="row-between"><span class="t-subhead c-gray">현재 사용 가능</span><span class="t-title3 bold c-blue">4 / 12칸</span></div>
+        <div class="progress" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="12"><span></span></div>
+        <div class="row-between t-footnote"><span>소형 2칸</span><span>중형 1칸</span><span>대형 1칸</span></div>
+        <p class="t-caption1 c-muted">칸 번호는 기사님이 택배 크기에 맞게 배정해요</p>
+      </div>
+
+      <h2 class="t-body bold">픽업 희망 시간</h2>
+      <div class="chips" data-group="day">
+        <button class="chip">오늘</button><button class="chip is-selected">내일</button><button class="chip">모레</button>
+      </div>
+      <div class="chips" data-group="time">
+        <button class="chip">오후</button><button class="chip is-selected">저녁</button><button class="chip">밤</button>
+      </div>
+    </div>
+    <div class="footer"><button class="btn btn-primary" data-go="s3">이 위치로 선택</button></div>
+    <div class="home-indicator"></div>
+  </section>
+
+  <!-- ===================== 03 안심 배송 정보 ===================== -->
+  <section class="screen" id="s3" aria-label="안심 배송 정보">
+    <div class="status-bar"><span>9:41</span><svg width="66" height="12"><use href="#i-status"/></svg></div>
+    <header class="nav-bar">
+      <button class="back" data-go="s2" aria-label="뒤로"><svg width="24" height="24"><use href="#i-back"/></svg></button>
+      <h1 class="t-headline">안심 배송 정보</h1>
+    </header>
+    <div class="content">
+      <div class="card is-selected">
+        <label class="check"><input type="checkbox" id="chk-all" checked /><span class="box c-white"><svg width="18" height="18"><use href="#i-check"/></svg></span>안심 배송 정보 사용</label>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label class="check"><input type="checkbox" id="chk-nick" checked /><span class="box c-white"><svg width="18" height="18"><use href="#i-check"/></svg></span>닉네임 사용</label>
+        <div class="field" id="field-nick"><span class="t-body bold c-blue">졸린 수달</span><span class="tag">자동 발급</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label class="check"><input type="checkbox" id="chk-phone" checked /><span class="box c-white"><svg width="18" height="18"><use href="#i-check"/></svg></span>안심번호 사용</label>
+        <div class="field" id="field-phone"><span class="t-body bold c-blue">050-1234-5678</span><span class="tag">자동 발급</span></div>
+      </div>
+
+      <p class="t-subhead c-gray">송장 미리보기</p>
+      <div class="card invoice">
+        <p class="line t-footnote"><span class="c-gray">받는 분</span><b class="c-blue" id="inv-name">졸린 수달</b></p>
+        <p class="line t-footnote"><span class="c-gray" id="inv-phone-label">안심번호</span><b class="c-blue" id="inv-phone">050-1234-5678</b></p>
+        <div class="barcode" id="barcode" aria-hidden="true"></div>
+      </div>
+      <p class="hint t-caption1 bold c-teal" id="safe-msg"><svg width="16" height="16"><use href="#i-lock"/></svg><span>실명·실제 번호는 송장에 인쇄되지 않아요</span></p>
+    </div>
+    <div class="footer"><button class="btn btn-primary" data-go="s4">32,000원 결제하기</button></div>
+    <div class="home-indicator"></div>
+  </section>
+
+  <!-- ===================== 04 알림 · 배송 완료·비밀번호 안내 ===================== -->
+  <section class="screen bg-gray" id="s4" aria-label="오는길택배 알림">
+    <div class="status-bar"><span>9:41</span><svg width="66" height="12"><use href="#i-status"/></svg></div>
+    <header class="nav-bar">
+      <button class="back" data-go="s3" aria-label="뒤로"><svg width="24" height="24"><use href="#i-back"/></svg></button>
+      <h1 class="t-headline">오는길택배</h1>
+    </header>
+    <div class="content" style="gap:12px">
+      <div class="sender"><span class="avatar c-white"><svg width="18" height="18"><use href="#i-box"/></svg></span><span class="t-subhead bold">오는길택배</span></div>
+      <div class="bubble">
+        <p class="t-footnote bold c-gray">주문 완료 안내</p>
+        <p class="t-subhead">중앙역 보관함 · <span class="pickup-text">내일 저녁</span> 픽업으로 접수됐어요</p>
+        <p class="t-caption1 c-muted">오후 2:14</p>
+      </div>
+      <article class="notice">
+        <div class="notice-head"><svg width="18" height="18"><use href="#i-lock"/></svg><span class="t-callout bold">배송 완료 · 비밀번호 안내</span></div>
+        <div class="notice-body">
+          <p class="t-callout"><span class="nick-text">졸린 수달</span>님, 택배가<br />중앙역 보관함 05번 칸에 보관됐어요.</p>
+          <div class="pw-box">
+            <span class="t-footnote c-gray">비밀번호</span>
+            <span class="t-title1 bold c-blue pw-num">482913</span>
+            <span class="t-caption1 c-gray">내일 23:00까지 보관</span>
+          </div>
+          <button class="btn btn-primary btn-sm" data-go="s5">수령 정보 보기</button>
+        </div>
+      </article>
+      <p class="t-caption1 c-muted center">수령 후에는 ‘파기 완료 안내’가 이어서 와요</p>
+    </div>
+    <div class="home-indicator"></div>
+  </section>
+
+  <!-- ===================== 05 수령 웹 · 비밀번호 확인·수령 ===================== -->
+  <section class="screen" id="s5" aria-label="택배 수령">
+    <div class="status-bar"><span>9:41</span><svg width="66" height="12"><use href="#i-status"/></svg></div>
+    <header class="nav-bar"><h1 class="t-headline">택배 수령</h1></header>
+    <div class="content" style="gap:14px">
+      <div class="center">
+        <p class="t-title3 bold">중앙역 보관함 · 1번 출구 앞</p>
+        <p class="t-footnote c-gray">위탁 장소 안내 · 기사님 배정 칸</p>
+      </div>
+      <div class="locker" id="locker" aria-label="보관함 배치도, 05번 칸 배정"></div>
+      <p class="t-subhead bold c-blue center">배정된 05번 칸 · 비밀번호 확인</p>
+      <div class="code" aria-label="비밀번호 4 8 2 9 1 3"><span>4</span><span>8</span><span>2</span><span>9</span><span>1</span><span>3</span></div>
+      <p class="t-footnote c-gray center">보관함 키패드에 비밀번호를 누르세요</p>
+      <div class="card" style="padding:14px 16px">
+        <p class="t-footnote bold c-gray">수령하면</p>
+        <div class="row-between t-footnote"><span>비밀번호</span><b class="c-blue">만료</b></div>
+        <div class="row-between t-footnote"><span>개인정보 · 송장 데이터</span><b class="c-blue">자동 파기</b></div>
+        <div class="row-between t-footnote"><span>파기 완료 안내</span><b class="c-teal">알림 전송</b></div>
+      </div>
+    </div>
+    <div class="footer"><button class="btn btn-primary" id="s5-done">수령 완료</button></div>
+    <div class="home-indicator"></div>
+  </section>
+
+  <!-- ===================== 06 수령 완료 · 정보 파기 완료 ===================== -->
+  <section class="screen" id="s6" aria-label="수령 완료">
+    <div class="status-bar"><span>9:41</span><svg width="66" height="12"><use href="#i-status"/></svg></div>
+    <header class="nav-bar"><h1 class="t-headline">수령 완료</h1></header>
+    <div class="content" style="gap:20px">
+      <div class="done-hero">
+        <div class="done-ring"><div class="c-white"><svg width="36" height="36"><use href="#i-check"/></svg></div></div>
+        <p class="t-title1 bold">수령 완료!</p>
+        <p class="t-body c-gray center">개인정보와 송장 데이터가<br />안전하게 파기됐어요.</p>
+      </div>
+      <div class="card surface summary">
+        <div class="row-between t-subhead"><span class="c-gray">수령 장소</span><b>중앙역 보관함 05번</b></div>
+        <div class="row-between t-subhead"><span class="c-gray">수령 시각</span><b id="done-time">오늘 19:42</b></div>
+        <div class="row-between t-subhead"><span class="c-gray">비밀번호</span><b class="c-gray">만료됨</b></div>
+        <div class="row-between t-subhead"><span class="c-gray">개인정보 · 송장</span><b class="c-teal">파기 완료</b></div>
+      </div>
+      <p class="hint t-caption1 bold c-teal" style="justify-content:center"><svg width="16" height="16"><use href="#i-lock"/></svg>흔적 걱정 없이 집에 가세요</p>
+    </div>
+    <div class="footer"><button class="btn btn-primary" data-go="s1">확인</button></div>
+    <div class="home-indicator"></div>
+  </section>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>
